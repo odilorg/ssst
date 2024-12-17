@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -38,12 +39,9 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->maxLength(255),
-                Select::make('role')
-                    ->options([
-                          'admin' => 'Admin',
-                           'super_admin' => 'Super Admin',
-                           'touroperator' => 'Touoperator',
-                    ])    
+                Select::make('roles')
+                    ->relationship('roles', 'name')
+                      
             ]);
     }
 
@@ -51,12 +49,15 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                TextColumn::make('roles.name')
+                ->label('Roles')
+                ->formatStateUsing(fn ($record) => 
+                    $record->roles->pluck('name')->implode(', ')
+                ),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('role')
-                    ->searchable(),    
+                // Tables\Columns\TextColumn::make('role')
+                //     ->searchable(),    
                
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -5,11 +5,15 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\PermissionRegistrar;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 /**
@@ -39,6 +43,17 @@ class User extends Authenticatable implements FilamentUser
         'tenant_id'
         
     ];
+
+    public function roles(): MorphToMany
+{
+    return $this->morphToMany(
+        Role::class,
+        'model',
+        config('permission.table_names.model_has_roles'),
+        config('permission.column_names.model_morph_key'),
+        app(PermissionRegistrar::class)->pivotRole
+    );
+}
 
     /**
      * The attributes that should be hidden for serialization.
