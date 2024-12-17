@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('guides', function (Blueprint $table) {
-            $table->foreignId('booking_id');
+        Schema::create('banks', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('mfo');
+            $table->string('bankName');
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('guides', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('banks');
     }
 };

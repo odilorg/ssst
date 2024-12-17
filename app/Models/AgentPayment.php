@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel as Model;
 
 class AgentPayment extends Model
 {
@@ -15,7 +15,8 @@ class AgentPayment extends Model
         'amount_paid',
         'payment_date',
         'payment_document_image',
-        'payment_method'
+        'payment_method',
+        'tenant_id'
     ];
 
 

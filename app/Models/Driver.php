@@ -7,7 +7,7 @@ use App\Models\Rating;
 use App\Models\CarDriver;
 use App\Models\SupplierPayment;
 use App\Models\TourRepeaterDriver;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel as Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

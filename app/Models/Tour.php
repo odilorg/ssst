@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Casts\MoneyCast;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel as Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

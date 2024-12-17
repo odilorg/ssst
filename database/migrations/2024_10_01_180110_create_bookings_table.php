@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('guest_id')->constrained('guests')->cascadeOnDelete();
-            $table->integer('grand_total');
+         //   $table->integer('grand_total');
             $table->string('payment_method');
             $table->string('payment_status');
             $table->text('notes')->nullable();
