@@ -32,8 +32,8 @@ class TourResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\Section::make('Tour Prices')
-                    ->description('Add Tour Prices')
+                Forms\Components\Section::make('Tour')
+                    ->description('Add Tour')
                     ->collapsible()
                     ->schema([
                         Forms\Components\TextInput::make('title')
@@ -73,6 +73,11 @@ class TourResource extends Resource
                                         Forms\Components\Select::make('car_id')
                                         ->relationship('car', 'plate_number')
                                         ->required(),
+                                        Forms\Components\Select::make('monuments')
+                                        ->relationship('monuments', 'name')
+                                        ->required()
+                                        ->multiple()
+                                        ->preload(),  
                                         Forms\Components\Select::make('hotel_id')
                                         ->relationship('hotel', 'name')
                                         ->required(),

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\BaseModel as Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TourDay extends Model
 {
@@ -33,4 +34,11 @@ public function hotel()
 {
     return $this->belongsTo(Hotel::class);
 }
+
+public function monuments(): BelongsToMany
+    {
+        return $this->belongsToMany(Monument::class, 'monument_tour_day')
+                    ->withTimestamps();
+    }
+
 }
