@@ -56,17 +56,17 @@ class CarResource extends Resource
                     ]),
                     Forms\Components\TextInput::make('color')
                     ->required(),
-                Forms\Components\Select::make('driver_id')
+                Forms\Components\Select::make('drivers')
                     ->required()
                     //  ->maxLength(255)
                     ->searchable()
                     ->preload()
-                    ->relationship('driver', 'full_name'),
+                    ->relationship('drivers', 'full_name'),
 
 
                 Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->required(),
+                    ->image(),
+                   // ->required(),
                
             ]);
     }

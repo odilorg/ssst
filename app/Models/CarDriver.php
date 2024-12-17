@@ -10,6 +10,10 @@ class CarDriver extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'car_driver'; // Specify the pivot table name
+
+    protected $fillable = ['car_id', 'driver_id', 'tenant_id'];
+
     public function car()
 {
     return $this->belongsTo(Car::class);

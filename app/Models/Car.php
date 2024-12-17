@@ -36,8 +36,9 @@ class Car extends Model
     return $this->belongsTo(CarBrand::class);
  }
 
- public function driver(): BelongsTo {
-    return $this->belongsTo(Driver::class);
+ public function drivers(): BelongsToMany
+ {
+     return $this->belongsToMany(Driver::class);
  }
 
 

@@ -84,7 +84,12 @@ class DriverResource extends Resource
                                 'methane' => 'Methane',
                                 'benzin' => 'Benzin',
                             ]),
-                            
+                            Forms\Components\Select::make('cars')
+                            ->required()
+                            //  ->maxLength(255)
+                            ->searchable()
+                            ->preload()
+                            ->relationship('cars', 'plate_number'),  
                         Forms\Components\FileUpload::make('driver_image')
                             ->image(),
                         //  ->required(),
@@ -132,25 +137,8 @@ class DriverResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('fuel_type')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('cars.model'),
+                Tables\Columns\TextColumn::make('cars.carBrand.brand_name'),
 
-                Tables\Columns\TextColumn::make('total_amount_paid')
-                    ->label('Total Amount Paid')
-                    ->formatStateUsing(fn($state) => number_format($state, 2)) // Convert to dollars and format
-                    ->money('USD', divideBy: 100)
-                    ->getStateUsing(fn($record) => $record->total_amount_paid), // Use the accessor method
-
-                // TextColumn::make('soldTours.tour.title')
-                //     ->label('Tour Title')
-                //     ->formatStateUsing(function ($state, $record) {
-                //         // Get the first associated SoldTour
-                //         $soldTour = $record->soldTours->first();
-
-                //         // Check if soldTour and its tour are available
-                //         return $soldTour ? $soldTour->tour->title : 'Unknown Title';
-                //     })
-                //     ->sortable()
-                //     ->searchable(),
                 Tables\Columns\ImageColumn::make('driver_image')
                     ->circular(),
 

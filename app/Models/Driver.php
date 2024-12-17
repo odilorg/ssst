@@ -29,37 +29,11 @@ class Driver extends Model
     {
         return $this->hasMany(Booking::class);
     }
-    public function cars(): HasMany
+    public function cars(): BelongsToMany
     {
-        return $this->hasMany(Car::class);
+        return $this->belongsToMany(Car::class);
     }
 
-    // public function driverPayments(): HasMany
-    // {
-    //     return $this->hasMany(DriverPayment::class);
-    // }
-
-    // public function sold_tours(): HasMany
-    // {
-    //     return $this->hasMany(SoldTour::class);
-    // }
-
-
-    // public function cars(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Car::class);
-    // }
-    // public function cars()
-    // {
-    //     return $this->belongsToMany(Car::class, 'car_driver', 'driver_id', 'car_id')
-    //                 ->withPivot('car_plate'); // Assume 'car_plate' is stored in the pivot table
-    // }
-
-    // public function payments()
-    // {
-    //     return $this->belongsToMany(SoldTour::class, 'driver_payment', 'driver_id', 'sold_tour_id')
-    //                 ->withPivot('amount_paid', 'payment_date', 'receipt_image', 'payment_type'); // Assume 'car_plate' is stored in the pivot table
-    // }
     
 
     public function ratings(): HasMany
