@@ -59,7 +59,7 @@ class TourResource extends Resource
                                 Forms\Components\TextInput::make('day_name')
                                 ->required()
                                 ->maxLength(255),
-                           
+                                
                                 
                             Forms\Components\Textarea::make('description')
                                 ->required()
@@ -67,7 +67,16 @@ class TourResource extends Resource
                            
                             Forms\Components\FileUpload::make('image')
                                 ->image(),
-
+                                Forms\Components\Section::make('Tour Days')
+                                    ->description('Tour Details')
+                                    ->schema([
+                                        Forms\Components\Select::make('car_id')
+                                        ->relationship('car', 'plate_number')
+                                        ->required(),
+                                        Forms\Components\Select::make('hotel_id')
+                                        ->relationship('hotel', 'name')
+                                        ->required(),
+                                    ])
 
                             ])->columnSpan(1),
                     ]),
