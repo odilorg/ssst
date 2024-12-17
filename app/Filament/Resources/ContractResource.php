@@ -20,7 +20,11 @@ class ContractResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Accounting';
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('view-contracts');
+    }
+    
     public static function form(Form $form): Form
     {
         return $form

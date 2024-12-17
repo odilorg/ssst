@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
 
 class UserResource extends Resource
 {
@@ -50,10 +51,10 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('roles.name')
-                ->label('Roles')
-                ->formatStateUsing(fn ($record) => 
-                    $record->roles->pluck('name')->implode(', ')
-                ),
+                ->label('Roles'),
+                // ->formatStateUsing(fn ($record) => 
+                //     $record->roles->pluck('name')->implode(', ')
+                // ),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('role')
@@ -85,7 +86,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RolesRelationManager::class,
         ];
     }
 
