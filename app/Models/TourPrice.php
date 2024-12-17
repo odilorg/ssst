@@ -11,6 +11,7 @@ class TourPrice extends Model
 
     protected $fillable = [
         'number_people',
-        'tour_price'
+        'tour_price',
+        'tenant_id'
     ];
 }

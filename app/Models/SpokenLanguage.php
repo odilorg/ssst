@@ -9,5 +9,5 @@ class SpokenLanguage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['language'];
+    protected $fillable = ['language', 'tenant_id'];
 }

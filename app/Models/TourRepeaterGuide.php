@@ -18,7 +18,7 @@ class TourRepeaterGuide extends Model
         'payment_date',
         'payment_document_image',
         'payment_method',
-        
+        'tenant_id'
 
     ];
     protected $casts = [

@@ -21,7 +21,8 @@ class Turfirma extends Model
         'bank_mfo',
         'director_name',
         'type',
-        'files'
+        'files',
+        'tenant_id'
     ];
 
    

@@ -16,7 +16,8 @@ class RoomRepair extends Model
         'room_number',
         'repair_name',
         'amount',
-        'notes'
+        'notes',
+        'tenant_id'
         ];
 
        

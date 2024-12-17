@@ -19,7 +19,8 @@ class Invoice extends Model
         'zayavka_id',
         'contract_id',
         'status',
-        'amount'
+        'amount',
+        'tenant_id'
     ];
 
     protected $casts = [

@@ -17,7 +17,8 @@ class Expense extends Model
         'expense_date',
         'amount',
         'hotel_id',
-        'payment_type'
+        'payment_type',
+        'tenant_id'
     ];
 
     protected $casts = [

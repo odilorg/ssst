@@ -21,7 +21,8 @@ class Employee extends Model
         'passport_image',
         'fathers_name',
         'pinfl',
-        'address'
+        'address',
+        'tenant_id'
     ];
 
     public function languages(): BelongsToMany

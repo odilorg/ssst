@@ -9,5 +9,5 @@ class Chat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'chat_id'];
+    protected $fillable = ['name', 'chat_id', 'tenant_id'];
 }

@@ -15,7 +15,7 @@ class Guide extends Model
         'lang_spoken' => 'array',
     ];
 
-    protected $fillable = ['first_name', 'last_name', 'email', 'phone01', 'phone02', 'lang_spoken', 'guide_image'];
+    protected $fillable = ['tenant_id', 'first_name', 'last_name', 'email', 'phone01', 'phone02', 'lang_spoken', 'guide_image'];
 
     public function languages(): BelongsToMany
     {
@@ -29,8 +29,8 @@ class Guide extends Model
     //                 ->withTimestamps();
     // }
 
-    public function supplier_payments(): HasMany
-    {
-        return $this->hasMany(SupplierPayment::class);
-    }
+    // public function supplier_payments(): HasMany
+    // {
+    //     return $this->hasMany(SupplierPayment::class);
+    // }
 }

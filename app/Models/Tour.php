@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tour extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'tour_duration', 'tour_description', 'tour_price'];
+    protected $fillable = ['tenant_id','title', 'tour_duration', 'tour_description', 'tour_price'];
 
     protected $casts = [
         'tour_price' => MoneyCast::class,

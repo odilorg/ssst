@@ -12,7 +12,8 @@ class CarBrand extends Model
     protected $fillable = [
          'brand_name',
          'number_seats',
-         'number_luggage'
+         'number_luggage',
+         'tenant_id'
 
         ];
 }

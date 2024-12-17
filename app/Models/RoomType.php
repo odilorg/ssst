@@ -27,6 +27,7 @@ class RoomType extends Model
         'hotel_id',
         'created_by',
         'updated_by',
+        'tenant_id'
        
     ];
 

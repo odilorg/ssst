@@ -33,7 +33,8 @@ class Zayavka extends Model
         'rooming',
         'notes',
         'user_id',
-        'image'
+        'image',
+        'tenant_id'
     ];
 
     public function acceptedBy()

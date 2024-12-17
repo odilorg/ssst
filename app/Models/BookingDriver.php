@@ -14,6 +14,7 @@ class BookingDriver extends Model
     protected $fillable = [ 
         'driver_id',
          'booking_id',
+         'tenant_id'
           
     ];
 }

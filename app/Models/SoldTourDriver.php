@@ -12,6 +12,7 @@ class SoldTourDriver extends Model
         'amount_paid',
         'payment_date',
         'payment_document_image',
-        'payment_method'
+        'payment_method',
+        'tenant_id'
     ] ;
 }

@@ -10,6 +10,7 @@ class ExpenseCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'tenant_id'
     ];
 }

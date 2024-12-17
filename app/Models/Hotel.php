@@ -29,7 +29,8 @@ protected $fillable = [
         'account_number',
         'bank_name',
         'inn',
-        'bank_mfo'
+        'bank_mfo',
+        'tenant_id'
 
     ];
 

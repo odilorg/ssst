@@ -34,6 +34,7 @@ class Contract extends Model
         'contract_title', 
         'contract_details', 
         'contract_number',
+        'tenant_id'
     ];
 
     protected static function booted()

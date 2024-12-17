@@ -17,7 +17,8 @@ class Car extends Model
           'image',
            'car_brand_id',
            'driver_id',
-           'color'
+           'color',
+           'tenant_id'
     ];
 
     // public function drivers(): BelongsToMany

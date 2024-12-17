@@ -14,6 +14,7 @@ class DriverPayment extends Model
         'amount_paid',
         'payment_date',
         'payment_type',
-        'receipt_image'
+        'receipt_image',
+        'tenant_id'
     ];
 }

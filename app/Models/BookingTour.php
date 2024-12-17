@@ -18,6 +18,7 @@ class BookingTour extends Model
         'dropoff_location',
         'tour_start_date_time',
         'special_request',
+        'tenant_id'
     ];
    
 

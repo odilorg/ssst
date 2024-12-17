@@ -19,7 +19,8 @@ class Guest extends Model
          'amount_paid',
          'payment_date',
          'payment_document_image',
-         'payment_method'
+         'payment_method',
+         'tenant_id'
         ];
         public function bookings(): HasMany
         {
