@@ -48,7 +48,29 @@ class TourResource extends Resource
                             ->maxLength(65535)
                             ->columnSpanFull(),
                     ]),
+                    Forms\Components\Section::make('Tour Days')
+                    ->description('Add Tour Days')
+                    ->collapsible()
+                    ->schema([
+                        Repeater::make(name: 'tourDays')
+                            ->label('Tour Days')
+                            ->relationship()  // Make sure this points to the correct relationship method in the TourBooking model
+                            ->schema([
+                                Forms\Components\TextInput::make('day_name')
+                                ->required()
+                                ->maxLength(255),
+                           
+                                
+                            Forms\Components\Textarea::make('description')
+                                ->required()
+                                ->columnSpanFull(),
+                           
+                            Forms\Components\FileUpload::make('image')
+                                ->image(),
 
+
+                            ])->columnSpan(1),
+                    ]),
 
 
 
