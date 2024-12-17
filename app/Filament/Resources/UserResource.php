@@ -97,11 +97,11 @@ class UserResource extends Resource
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
-    public static function canViewAny(): bool
-    {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
+    // public static function canViewAny(): bool
+    // {
+    //     /** @var \App\Models\User $user */
+    //     $user = auth()->user();
         
-        return $user && $user->hasRole('super_admin');
-    }
+    //     return $user && $user->hasRole('super_admin');
+    // }
 }

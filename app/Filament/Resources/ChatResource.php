@@ -80,11 +80,11 @@ class ChatResource extends Resource
         ];
     }
 
-    public static function canViewAny(): bool
-    {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
+    // public static function canViewAny(): bool
+    // {
+    //     /** @var \App\Models\User $user */
+    //     $user = auth()->user();
         
-        return $user && $user->hasRole('super_admin');
-    }
+    //     return $user && $user->hasRole('super_admin');
+    // }
 }

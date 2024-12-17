@@ -18,6 +18,7 @@ class RoomRepairResource extends Resource
     protected static ?string $model = RoomRepair::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Accounting';
 
     public static function form(Form $form): Form
     {

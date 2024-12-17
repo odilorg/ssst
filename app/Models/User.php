@@ -35,7 +35,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'role'
+        
     ];
 
     /**
@@ -60,16 +60,16 @@ class User extends Authenticatable implements FilamentUser
     ];
 
     // Check if the user has a specific role
-    public function hasRole(string $role): bool
-    {
-        return $this->role === $role;
-    }
+    // public function hasRole(string $role): bool
+    // {
+    //     return $this->role === $role;
+    // }
 
     // Check if the user has any role in a list
-    public function hasAnyRole(array $roles): bool
-    {
-        return in_array($this->role, $roles);
-    }
+    // public function hasAnyRole(array $roles): bool
+    // {
+    //     return in_array($this->role, $roles);
+    // }
 
 
 }

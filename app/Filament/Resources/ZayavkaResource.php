@@ -26,6 +26,7 @@ class ZayavkaResource extends Resource
     protected static ?string $model = Zayavka::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Accounting';
 
     public static function form(Form $form): Form
     {

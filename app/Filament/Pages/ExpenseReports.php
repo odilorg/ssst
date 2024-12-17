@@ -17,6 +17,9 @@ class ExpenseReports extends Page
     protected static ?string $navigationLabel = 'Expense Reports';
     protected static ?string $title = 'Expense Reports';
 
+    protected static ?string $navigationGroup = 'Etc';
+
+
     public ?array $reportData = null;
 
     protected static string $view = 'filament.pages.expense-reports';

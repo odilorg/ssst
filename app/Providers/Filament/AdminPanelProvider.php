@@ -54,6 +54,16 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+
+            ->navigationGroups([
+                'Tour Details',
+                'Driver and Guide Details',
+                'Accounting',
+                'Hotel Management',
+                'Scheduled Messages',
+                'Etc',
+                'Users Management'
             ]);
     }
 }
