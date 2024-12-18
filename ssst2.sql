@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 06:17 AM
+-- Generation Time: Dec 18, 2024 at 05:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -2089,15 +2089,19 @@ CREATE TABLE `cars` (
   `tenant_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `model` varchar(255) NOT NULL,
-  `number_seats` int(11) NOT NULL,
-  `number_luggage` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `plate_number` varchar(255) NOT NULL,
   `car_brand_id` bigint(20) UNSIGNED NOT NULL,
-  `driver_id` bigint(20) UNSIGNED NOT NULL,
   `color` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cars`
+--
+
+INSERT INTO `cars` (`id`, `tenant_id`, `created_at`, `updated_at`, `image`, `plate_number`, `car_brand_id`, `color`) VALUES
+(4, 1, '2024-12-17 22:25:09', '2024-12-17 22:25:09', '01JFBWRHYM2XWZCQNTFBQMGGB3.jpg', '544', 1, 'Et et repellendus E'),
+(5, 1, '2024-12-17 22:28:04', '2024-12-17 22:28:25', '01JFBWXWMHX7ZFMW8QFE7Z8ZME.jpg', '510', 2, 'Alias dolorem iure p');
 
 -- --------------------------------------------------------
 
@@ -2120,7 +2124,8 @@ CREATE TABLE `car_brands` (
 --
 
 INSERT INTO `car_brands` (`id`, `tenant_id`, `created_at`, `updated_at`, `brand_name`, `number_seats`, `number_luggage`) VALUES
-(1, 1, '2024-12-16 23:36:46', '2024-12-16 23:36:46', 'BYD', 3, 3);
+(1, 1, '2024-12-16 23:36:46', '2024-12-16 23:36:46', 'BYD', 3, 3),
+(2, 1, '2024-12-17 22:28:23', '2024-12-17 22:28:23', 'GM', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -2130,13 +2135,22 @@ INSERT INTO `car_brands` (`id`, `tenant_id`, `created_at`, `updated_at`, `brand_
 
 CREATE TABLE `car_driver` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tenant_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `car_id` bigint(20) UNSIGNED NOT NULL,
-  `driver_id` bigint(20) UNSIGNED NOT NULL,
-  `car_plate` varchar(255) NOT NULL
+  `driver_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `car_driver`
+--
+
+INSERT INTO `car_driver` (`id`, `created_at`, `updated_at`, `car_id`, `driver_id`) VALUES
+(1, NULL, NULL, 3, 1),
+(2, NULL, NULL, 4, 1),
+(3, NULL, NULL, 5, 1),
+(4, NULL, NULL, 5, 2),
+(5, NULL, NULL, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -2189,7 +2203,8 @@ CREATE TABLE `drivers` (
 --
 
 INSERT INTO `drivers` (`id`, `tenant_id`, `created_at`, `updated_at`, `first_name`, `last_name`, `email`, `phone01`, `phone02`, `fuel_type`, `driver_image`, `extra_details`, `address_city`) VALUES
-(1, 1, '2024-12-16 23:38:26', '2024-12-16 23:38:26', 'Nicholas', 'Wilson', 'xujodaby@mailinator.com', '+1 912 813-3975', '+1 143 221-5943', 'benzin', '01JF9EJ0TNT8MPB8GYR3028F8D.png', 'Id quis reprehender', 'Ipsum tempora eu qu');
+(2, 1, '2024-12-17 22:29:43', '2024-12-17 22:29:43', 'Ralph', 'Giles', 'jixuxo@mailinator.com', '+1 778 307-6804', '+1 364 217-8143', 'benzin', '01JFBX0XXE5HJX2RBY06N0E1WP.jpg', 'Voluptas sit simili', 'Duis dolor unde in a'),
+(3, 1, '2024-12-17 22:30:19', '2024-12-17 22:30:19', 'Grant', 'Phillips', 'veconip@mailinator.com', '+1 693 526-4056', '+1 763 471-5966', 'methane', '01JFBX20Z9SDHXHDG8E7K7WBEV.jpg', 'Aut qui ut dolorum o', 'Proident deserunt i');
 
 -- --------------------------------------------------------
 
@@ -2355,7 +2370,7 @@ CREATE TABLE `guides` (
 --
 
 INSERT INTO `guides` (`id`, `tenant_id`, `created_at`, `updated_at`, `first_name`, `last_name`, `email`, `phone01`, `phone02`, `guide_image`) VALUES
-(1, 1, '2024-12-16 23:58:05', '2024-12-16 23:58:05', 'Giacomo', 'Keith', 'lodyqowyji@mailinator.com', '+1 358 821-8948', '+1 248 473-5389', '01JF9FNZZABYZ1ST1XNA6RN0JX.png');
+(2, 1, '2024-12-17 22:32:16', '2024-12-17 22:32:16', 'Chloe', 'Dunlap', 'sejejagyc@mailinator.com', '+1 722 147-7866', '+1 336 941-2198', '01JFBX5KDYV6BCA8MPW7FA9YD1.png');
 
 -- --------------------------------------------------------
 
@@ -2399,6 +2414,13 @@ CREATE TABLE `hotels` (
   `inn` varchar(255) NOT NULL,
   `bank_mfo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `hotels`
+--
+
+INSERT INTO `hotels` (`id`, `tenant_id`, `created_at`, `updated_at`, `name`, `description`, `room_quantity`, `number_people`, `location`, `address`, `phone`, `email`, `website`, `director_name`, `official_name`, `account_number`, `bank_name`, `inn`, `bank_mfo`) VALUES
+(1, 1, '2024-12-17 22:34:08', '2024-12-17 22:34:08', 'Rana Gilmore', 'Reprehenderit ipsa incidunt do minim illo ad est qui libero consequatur blanditiis est molestiae ut ut', 353, 326, 'Aut error vero nostrud voluptas nulla in ad deserunt praesentium facilis', 'Asperiores sit ipsum explicabo Id sed necessitatibus eum fugiat sit quo excepteur vero non quis dolorem', '+1 699 572-5364', 'nuvy@mailinator.com', 'https://www.kikinyro.mobi', 'Walter Phelps', 'Jena Pena', '92400000000000000000', 'Fallon Vance', '232323323', '02322');
 
 -- --------------------------------------------------------
 
@@ -2460,7 +2482,6 @@ CREATE TABLE `language_employee` (
 
 CREATE TABLE `language_guide` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tenant_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `spoken_language_id` bigint(20) UNSIGNED NOT NULL,
@@ -2471,8 +2492,10 @@ CREATE TABLE `language_guide` (
 -- Dumping data for table `language_guide`
 --
 
-INSERT INTO `language_guide` (`id`, `tenant_id`, `created_at`, `updated_at`, `spoken_language_id`, `guide_id`) VALUES
-(1, 1, NULL, NULL, 1, 1);
+INSERT INTO `language_guide` (`id`, `created_at`, `updated_at`, `spoken_language_id`, `guide_id`) VALUES
+(1, NULL, NULL, 1, 1),
+(2, NULL, NULL, 1, 2),
+(3, NULL, NULL, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -2622,7 +2645,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (112, '2024_12_12_120006_add_files_to_turfirmas_table', 1),
 (113, '2024_12_17_033921_create_permission_tables', 2),
 (114, '2024_12_17_034358_add_tenant_id_to_tables', 3),
-(115, '2024_12_17_050328_create_banks_table', 4);
+(115, '2024_12_17_050328_create_banks_table', 4),
+(116, '2024_12_17_133454_create_tour_days_table', 5),
+(117, '2024_12_17_154350_add_car_id_to_tour_days_table', 5),
+(118, '2024_12_17_155700_create_monuments_table', 5),
+(119, '2024_12_17_161515_create_monument_tour_day_table', 5),
+(120, '2024_12_18_033845_add_guide_id_to_tour_days_table', 6);
 
 -- --------------------------------------------------------
 
@@ -2649,6 +2677,59 @@ CREATE TABLE `model_has_roles` (
   `model_id` bigint(20) UNSIGNED NOT NULL,
   `tenant_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`, `tenant_id`) VALUES
+(1, 'App\\Models\\User', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monuments`
+--
+
+CREATE TABLE `monuments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `location_city` varchar(255) NOT NULL,
+  `tenant_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `monuments`
+--
+
+INSERT INTO `monuments` (`id`, `created_at`, `updated_at`, `name`, `description`, `image`, `location_city`, `tenant_id`) VALUES
+(1, '2024-12-17 22:18:47', '2024-12-17 22:18:47', 'Registon', 'Repudiandae ea est ', '01JFBWCXDAWHVRFT4XBECQ6K2W.jpg', 'Sam', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monument_tour_day`
+--
+
+CREATE TABLE `monument_tour_day` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `tour_day_id` bigint(20) UNSIGNED NOT NULL,
+  `monument_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `monument_tour_day`
+--
+
+INSERT INTO `monument_tour_day` (`id`, `created_at`, `updated_at`, `tour_day_id`, `monument_id`) VALUES
+(1, '2024-12-17 22:36:52', '2024-12-17 22:36:52', 1, 1),
+(2, '2024-12-17 22:37:27', '2024-12-17 22:37:27', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -2677,6 +2758,18 @@ CREATE TABLE `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `tenant_id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'create-user', 'web', '2024-12-17 01:21:27', '2024-12-17 03:24:16'),
+(2, 1, 'edit-user', 'web', '2024-12-17 01:35:48', '2024-12-17 03:24:23'),
+(3, 1, 'view-Etc', 'web', '2024-12-17 03:24:59', '2024-12-17 03:27:38'),
+(4, 1, 'view-contracts', 'web', '2024-12-17 03:26:03', '2024-12-17 03:33:01'),
+(5, 1, 'view-Scheduled Messages', 'web', '2024-12-17 03:28:23', '2024-12-17 03:28:23'),
+(6, 1, 'view-bookings', 'web', '2024-12-17 22:19:32', '2024-12-17 22:19:32');
 
 -- --------------------------------------------------------
 
@@ -2747,6 +2840,14 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `tenant_id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'admin', 'web', '2024-12-17 01:36:06', '2024-12-17 01:36:06'),
+(2, 1, 'touroperator', 'web', '2024-12-17 22:19:55', '2024-12-17 22:19:55');
+
 -- --------------------------------------------------------
 
 --
@@ -2758,6 +2859,16 @@ CREATE TABLE `role_has_permissions` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
   `tenant_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`, `tenant_id`) VALUES
+(1, 1, 1),
+(4, 1, 1),
+(4, 2, 1),
+(6, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -2934,7 +3045,8 @@ CREATE TABLE `spoken_languages` (
 --
 
 INSERT INTO `spoken_languages` (`id`, `tenant_id`, `created_at`, `updated_at`, `language`) VALUES
-(1, 1, '2024-12-16 23:38:57', '2024-12-16 23:38:57', 'En');
+(1, 1, '2024-12-16 23:38:57', '2024-12-16 23:38:57', 'En'),
+(2, 1, '2024-12-17 22:31:59', '2024-12-17 22:31:59', 'Rus');
 
 -- --------------------------------------------------------
 
@@ -3038,6 +3150,34 @@ CREATE TABLE `tour_booking_repeaters` (
   `payment_date` date DEFAULT NULL,
   `amount_paid` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_days`
+--
+
+CREATE TABLE `tour_days` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `day_name` varchar(255) NOT NULL,
+  `tour_id` bigint(20) UNSIGNED NOT NULL,
+  `description` text NOT NULL,
+  `tenant_id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `car_id` bigint(20) UNSIGNED NOT NULL,
+  `hotel_id` bigint(20) UNSIGNED NOT NULL,
+  `guide_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tour_days`
+--
+
+INSERT INTO `tour_days` (`id`, `created_at`, `updated_at`, `day_name`, `tour_id`, `description`, `tenant_id`, `image`, `car_id`, `hotel_id`, `guide_id`) VALUES
+(1, '2024-12-17 22:36:52', '2024-12-17 22:41:53', 'DAy 1', 1, 'dfksdl', 1, NULL, 5, 1, 2),
+(2, '2024-12-17 22:37:27', '2024-12-17 22:41:53', 'DAy 2', 1, 'dsf', 1, '01JFBXF2XNMKRTEZF3ECCX4ACG.png', 5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -3187,7 +3327,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `tenant_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Odil', 'odilorg@gmail.com', NULL, '$2y$12$GAh.ds5/r550wqDXjcE6m.QqcujeKLfHpwU8cA/DI1BDlQg43UT6O', NULL, '2024-12-16 22:17:09', '2024-12-16 22:17:09');
+(1, 1, 'Odil', 'odilorg@gmail.com', NULL, '$2y$12$xPSPhgQ.7YZtc31coEWsveKyMaAUXEB.CpVhioGcMoLSLtXrkm8ca', 'coHqHBX8cI81TOldiO4G8LaL7E6dhKmnInbhKAul6cpAhzvQJqDUBD9M70ZB', '2024-12-16 22:17:09', '2024-12-17 02:57:44');
 
 -- --------------------------------------------------------
 
@@ -3412,6 +3552,18 @@ ALTER TABLE `model_has_roles`
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
+-- Indexes for table `monuments`
+--
+ALTER TABLE `monuments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `monument_tour_day`
+--
+ALTER TABLE `monument_tour_day`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -3550,6 +3702,13 @@ ALTER TABLE `tour_booking_repeaters`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tour_days`
+--
+ALTER TABLE `tour_days`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tour_days_tour_id_foreign` (`tour_id`);
+
+--
 -- Indexes for table `tour_payments`
 --
 ALTER TABLE `tour_payments`
@@ -3644,19 +3803,19 @@ ALTER TABLE `booking_tours`
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `car_brands`
 --
 ALTER TABLE `car_brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `car_driver`
 --
 ALTER TABLE `car_driver`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contracts`
@@ -3668,7 +3827,7 @@ ALTER TABLE `contracts`
 -- AUTO_INCREMENT for table `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `driver_payments`
@@ -3716,7 +3875,7 @@ ALTER TABLE `guest_tour_booking`
 -- AUTO_INCREMENT for table `guides`
 --
 ALTER TABLE `guides`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `guide_tour_booking`
@@ -3728,7 +3887,7 @@ ALTER TABLE `guide_tour_booking`
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `invoices`
@@ -3752,7 +3911,7 @@ ALTER TABLE `language_employee`
 -- AUTO_INCREMENT for table `language_guide`
 --
 ALTER TABLE `language_guide`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `members`
@@ -3764,13 +3923,25 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+
+--
+-- AUTO_INCREMENT for table `monuments`
+--
+ALTER TABLE `monuments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `monument_tour_day`
+--
+ALTER TABLE `monument_tour_day`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -3794,7 +3965,7 @@ ALTER TABLE `repeater_suppliers`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roomprices`
@@ -3848,7 +4019,7 @@ ALTER TABLE `sold_tour_guide`
 -- AUTO_INCREMENT for table `spoken_languages`
 --
 ALTER TABLE `spoken_languages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `supplier_payments`
@@ -3879,6 +4050,12 @@ ALTER TABLE `tour_bookings`
 --
 ALTER TABLE `tour_booking_repeaters`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tour_days`
+--
+ALTER TABLE `tour_days`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tour_payments`
@@ -4014,6 +4191,12 @@ ALTER TABLE `sold_tour_guest`
 ALTER TABLE `sold_tour_guide`
   ADD CONSTRAINT `sold_tour_guide_guide_id_foreign` FOREIGN KEY (`guide_id`) REFERENCES `guides` (`id`),
   ADD CONSTRAINT `sold_tour_guide_sold_tour_id_foreign` FOREIGN KEY (`sold_tour_id`) REFERENCES `sold_tours` (`id`);
+
+--
+-- Constraints for table `tour_days`
+--
+ALTER TABLE `tour_days`
+  ADD CONSTRAINT `tour_days_tour_id_foreign` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`);
 
 --
 -- Constraints for table `zayavkas`
