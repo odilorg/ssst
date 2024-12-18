@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TourDayResource extends Resource
 {
     protected static ?string $model = TourDay::class;
+    protected static ?string $navigationGroup = 'Tour Details';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

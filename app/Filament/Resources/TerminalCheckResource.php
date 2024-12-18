@@ -27,6 +27,7 @@ use App\Filament\Resources\TerminalCheckResource\RelationManagers;
 class TerminalCheckResource extends Resource
 {
     protected static ?string $model = TerminalCheck::class;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

@@ -14,6 +14,9 @@ use App\Models\Expense;
 class ExpenseReports extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
+
+
     protected static ?string $navigationLabel = 'Expense Reports';
     protected static ?string $title = 'Expense Reports';
 

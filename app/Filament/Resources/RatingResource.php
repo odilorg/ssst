@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class RatingResource extends Resource
 {
     protected static ?string $model = Rating::class;
+    protected static bool $shouldRegisterNavigation = false;
+
+
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

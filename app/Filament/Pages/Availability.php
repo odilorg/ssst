@@ -15,6 +15,9 @@ class Availability extends Page implements Forms\Contracts\HasForms
     use Forms\Concerns\InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static bool $shouldRegisterNavigation = false;
+
+
     protected static ?string $navigationGroup = 'Hotel Management';
     protected static ?string $navigationLabel = 'Room Availability';
     protected static string $view = 'filament.pages.availability';

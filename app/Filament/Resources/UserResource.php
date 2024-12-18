@@ -19,6 +19,9 @@ use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
+    protected static bool $shouldRegisterNavigation = false;
+
+
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 

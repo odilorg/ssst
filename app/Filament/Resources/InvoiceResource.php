@@ -17,6 +17,7 @@ use App\Filament\Resources\InvoiceResource\RelationManagers;
 class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
