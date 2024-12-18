@@ -54,7 +54,7 @@ class CarResource extends Resource
                             ->required()
                             ->numeric(),
                     ]),
-                    Forms\Components\TextInput::make('color')
+                Forms\Components\TextInput::make('color')
                     ->required(),
                 Forms\Components\Select::make('drivers')
                     ->required()
@@ -66,8 +66,8 @@ class CarResource extends Resource
 
                 Forms\Components\FileUpload::make('image')
                     ->image(),
-                   // ->required(),
-               
+                // ->required(),
+
             ]);
     }
 
@@ -94,17 +94,17 @@ class CarResource extends Resource
                     ->label('luggage')
                     ->numeric()
                     ->sortable(),
-            Tables\Columns\ImageColumn::make('image')
+                Tables\Columns\ImageColumn::make('image')
                     ->label('Preview')
-                    ->url(fn ($record) => asset('storage/' . $record->image)) // Make the full image URL accessible
+                    ->url(fn($record) => asset('storage/' . $record->image)) // Make the full image URL accessible
                     ->openUrlInNewTab() // Allow viewing the full image in a new tab
-                   ->circular()
+                    ->circular()
                     ->height(50) // Adjust thumbnail height
-                    ->width(50),// Adjust thumbnail width
-                
-                    Tables\Columns\TextColumn::make('color')
-                        ->label('Color')
-//                        ->sortable(),    
+                    ->width(50), // Adjust thumbnail width
+
+                Tables\Columns\TextColumn::make('color')
+                    ->label('Color')
+                //                        ->sortable(),    
             ])
             ->filters([
                 //

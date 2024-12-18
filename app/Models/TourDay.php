@@ -16,7 +16,11 @@ class TourDay extends Model
         'tour_id',
         'description',
         'tenant_id',
-        'image'
+        'image',
+        'car_id',
+        'hotel_id',
+        'guide_id'
+
     ];
 
 // In TourDay model
@@ -33,6 +37,11 @@ public function car()
 public function hotel()
 {
     return $this->belongsTo(Hotel::class);
+}
+
+public function guide()
+{
+    return $this->belongsTo(Guide::class);
 }
 
 public function monuments(): BelongsToMany

@@ -48,7 +48,7 @@ class TourResource extends Resource
                             ->maxLength(65535)
                             ->columnSpanFull(),
                     ]),
-                    Forms\Components\Section::make('Tour Days')
+                Forms\Components\Section::make('Tour Days')
                     ->description('Add Tour Days')
                     ->collapsible()
                     ->schema([
@@ -57,30 +57,33 @@ class TourResource extends Resource
                             ->relationship()  // Make sure this points to the correct relationship method in the TourBooking model
                             ->schema([
                                 Forms\Components\TextInput::make('day_name')
-                                ->required()
-                                ->maxLength(255),
-                                
-                                
-                            Forms\Components\Textarea::make('description')
-                                ->required()
-                                ->columnSpanFull(),
-                           
-                            Forms\Components\FileUpload::make('image')
-                                ->image(),
+                                    ->required()
+                                    ->maxLength(255),
+
+
+                                Forms\Components\Textarea::make('description')
+                                    ->required()
+                                    ->columnSpanFull(),
+
+                                Forms\Components\FileUpload::make('image')
+                                    ->image(),
                                 Forms\Components\Section::make('Tour Days')
                                     ->description('Tour Details')
                                     ->schema([
                                         Forms\Components\Select::make('car_id')
-                                        ->relationship('car', 'plate_number')
-                                        ->required(),
+                                            ->relationship('car', 'plate_number')
+                                            ->required(),
                                         Forms\Components\Select::make('monuments')
-                                        ->relationship('monuments', 'name')
-                                        ->required()
-                                        ->multiple()
-                                        ->preload(),  
+                                            ->relationship('monuments', 'name')
+                                            ->required()
+                                            ->multiple()
+                                            ->preload(),
                                         Forms\Components\Select::make('hotel_id')
-                                        ->relationship('hotel', 'name')
-                                        ->required(),
+                                            ->relationship('hotel', 'name')
+                                            ->required(),
+                                        Forms\Components\Select::make('guide_id')
+                                            ->relationship('guide', 'full_name')
+                                            ->required(),    
                                     ])
 
                             ])->columnSpan(1),
@@ -171,8 +174,8 @@ class TourResource extends Resource
                             ->schema([
                                 TextEntry::make('number_people'),
                                 TextEntry::make('tour_price')
-                               
-                                    //->columnSpan(2),
+
+                                //->columnSpan(2),
                             ])->columns(2)
                     ])->columns(2)
 
