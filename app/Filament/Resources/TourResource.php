@@ -52,44 +52,71 @@ class TourResource extends Resource
                     ->description('Add Tour Days')
                     ->collapsible()
                     ->schema([
-                        Repeater::make(name: 'tourDays')
-                            ->label('Tour Days')
-                            ->relationship()  // Make sure this points to the correct relationship method in the TourBooking model
-                            ->schema([
-                                Forms\Components\TextInput::make('day_name')
-                                    ->required()
-                                    ->maxLength(255),
+                        Forms\Components\Repeater::make('tourDays')
+    ->label('Tour Days')
+    ->relationship()
+    ->schema([
+        Forms\Components\TextInput::make('day_name')
+            ->required()
+            ->maxLength(255),
 
+        Forms\Components\Textarea::make('description')
+            ->required()
+            ->columnSpanFull(),
 
-                                Forms\Components\Textarea::make('description')
-                                    ->required()
-                                    ->columnSpanFull(),
+        Forms\Components\FileUpload::make('image')
+            ->image(),
 
-                                Forms\Components\FileUpload::make('image')
-                                    ->image(),
-                                Forms\Components\Section::make('Tour Days')
-                                    ->description('Tour Details')
-                                    ->schema([
-                                        Forms\Components\Select::make('car_id')
-                                            ->relationship('car', 'plate_number')
-                                            ->required(),
-                                        Forms\Components\Select::make('monuments')
-                                            ->relationship('monuments', 'name')
-                                            ->required()
-                                            ->multiple()
-                                            ->preload(),
-                                        Forms\Components\Select::make('hotel_id')
-                                            ->relationship('hotel', 'name')
-                                            ->required(),
-                                        Forms\Components\Select::make('guide_id')
-                                            ->relationship('guide', 'full_name')
-                                            ->required(),    
-                                    ])
+        Forms\Components\Section::make('Transportation Details')
+            ->description('Assign Driver and Car')
+            ->schema([
+                Forms\Components\Select::make('driver_id')
+                    ->label('Driver')
+                    ->options(\App\Models\Driver::pluck('full_name', 'id')) // Populate drivers
+                    ->required()
+                    ->reactive(),
 
-                            ])->columnSpan(1),
+                Forms\Components\Select::make('car_id')
+                    ->label('Car')
+                    ->options(function ($get) {
+                        $driverId = $get('driver_id');
+                        return $driverId
+                            ? \App\Models\Car::whereHas('drivers', function ($query) use ($driverId) {
+                                $query->where('drivers.id', $driverId);
+                            })->pluck('plate_number', 'id')
+                            : [];
+                    })
+                    ->required()
+                    ->placeholder('Select a car')
+                    ->afterStateUpdated(function ($state, $set, $record) {
+                        if (isset($state['driver_id'], $state['car_id'])) {
+                            $tourDay = \App\Models\TourDay::find($record->id);
+                            if ($tourDay) {
+                                $tourDay->drivers()->syncWithoutDetaching([$state['driver_id']]);
+                                $tourDay->cars()->syncWithoutDetaching([$state['car_id']]);
+                            }
+                        }
+                    }),
+            ]),
+        Forms\Components\Select::make('monuments')
+            ->relationship('monuments', 'name')
+            ->required()
+            ->multiple()
+            ->preload(),
+        Forms\Components\Select::make('hotels')
+            ->relationship('hotels', 'name')
+            ->required()
+            ->multiple()
+            ->preload(),
+        Forms\Components\Select::make('guides')
+            ->relationship('guides', 'full_name')
+            ->required()
+            ->multiple()
+            ->preload(),
+    ])
+    ->columnSpan(1),
+
                     ]),
-
-
 
                 Forms\Components\Section::make('Tour Prices')
                     ->description('Add Tour Prices')
@@ -97,12 +124,8 @@ class TourResource extends Resource
                     ->schema([
                         Repeater::make(name: 'tourPrices')
                             ->label('Tour Prices')
-                            ->relationship()  // Make sure this points to the correct relationship method in the TourBooking model
+                            ->relationship()
                             ->schema([
-
-                                // Forms\Components\TextInput::make('tour_id')
-                                //     ->required()
-                                //     ->maxLength(255),
                                 Forms\Components\TextInput::make('number_people')
                                     ->required()
                                     ->maxLength(255),
@@ -112,7 +135,6 @@ class TourResource extends Resource
                                     ->mask(RawJs::make('$money($input)'))
                                     ->stripCharacters(',')
                                     ->numeric(),
-
 
                             ])->columnSpan(1),
                     ]),
@@ -160,22 +182,18 @@ class TourResource extends Resource
             ->schema([
 
                 Section::make('Tour Info')
-                    // ->description('Prevent abuse by limiting the number of requests per period')
                     ->schema([
                         TextEntry::make('title'),
                         TextEntry::make('tour_duration'),
                     ])->columns(2),
 
                 Section::make(heading: 'Tour Prices')
-                    // ->description('Prevent abuse by limiting the number of requests per period')
                     ->schema([
 
                         RepeatableEntry::make('tourPrices')
                             ->schema([
                                 TextEntry::make('number_people'),
                                 TextEntry::make('tour_price')
-
-                                //->columnSpan(2),
                             ])->columns(2)
                     ])->columns(2)
 
@@ -194,7 +212,6 @@ class TourResource extends Resource
         return [
             'index' => Pages\ListTours::route('/'),
             'create' => Pages\CreateTour::route('/create'),
-            //     'view' => Pages\ViewTour::route('/{record}'),
             'edit' => Pages\EditTour::route('/{record}/edit'),
         ];
     }

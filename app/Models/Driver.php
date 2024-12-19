@@ -34,7 +34,11 @@ class Driver extends Model
         return $this->belongsToMany(Car::class);
     }
 
-    
+    public function tourDays()
+{
+    return $this->belongsToMany(TourDay::class, 'driver_tour_day', 'driver_id', 'tour_day_id');
+}
+
 
     public function ratings(): HasMany
     {

@@ -40,7 +40,11 @@ class Car extends Model
  {
      return $this->belongsToMany(Driver::class);
  }
-
+ public function tourDays()
+ {
+     return $this->belongsToMany(TourDay::class, 'car_tour_day', 'car_id', 'tour_day_id');
+ }
+ 
 
 }
  

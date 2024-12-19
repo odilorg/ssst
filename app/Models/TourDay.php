@@ -29,19 +29,24 @@ public function tour()
     return $this->belongsTo(Tour::class);
 }
 
-public function car()
+public function drivers()
 {
-    return $this->belongsTo(Car::class);
+    return $this->belongsToMany(Driver::class, 'driver_tour_day', 'tour_day_id', 'driver_id');
 }
 
-public function hotel()
+public function cars()
 {
-    return $this->belongsTo(Hotel::class);
+    return $this->belongsToMany(Car::class, 'car_tour_day', 'tour_day_id', 'car_id');
 }
 
-public function guide()
+public function hotels(): BelongsToMany
 {
-    return $this->belongsTo(Guide::class);
+    return $this->belongsToMany(Hotel::class);
+}
+
+public function guides(): BelongsToMany
+{
+    return $this->belongsToMany(Guide::class);
 }
 
 public function monuments(): BelongsToMany

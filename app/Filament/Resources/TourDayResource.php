@@ -32,7 +32,7 @@ class TourDayResource extends Resource
                 ->searchable()
                 ->preload()
                     ->required(),
-                    Forms\Components\Select::make('car_id')
+                    Forms\Components\Select::make('drivers')
                     ->relationship('car', 'plate_number')
                     ->required(),    
                     
