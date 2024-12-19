@@ -35,14 +35,26 @@ class Driver extends Model
     }
 
     public function tourDays()
-{
-    return $this->belongsToMany(TourDay::class, 'driver_tour_day', 'driver_id', 'tour_day_id');
-}
+    {
+        return $this->hasMany(TourDay::class);
+    }
 
 
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class, 'owner_id')
+                    ->where('owner_type', 'driver');
+    }
+
+    public function assignedVehicles()
+    {
+        return $this->belongsToMany(Vehicle::class, 'driver_vehicle')
+                    ->withPivot('start_date', 'end_date');
     }
 
    

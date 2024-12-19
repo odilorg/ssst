@@ -29,9 +29,9 @@ public function tour()
     return $this->belongsTo(Tour::class);
 }
 
-public function drivers()
+public function driver()
 {
-    return $this->belongsToMany(Driver::class, 'driver_tour_day', 'tour_day_id', 'driver_id');
+    return $this->belongsTo(Driver::class);
 }
 
 public function cars()
@@ -53,6 +53,11 @@ public function monuments(): BelongsToMany
     {
         return $this->belongsToMany(Monument::class, 'monument_tour_day')
                     ->withTimestamps();
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
     }
 
 }
