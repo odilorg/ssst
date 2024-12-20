@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\DriverResource\Pages;
+namespace App\Filament\Resources\VehicleResource\Pages;
 
-use App\Filament\Resources\DriverResource;
+use App\Filament\Resources\VehicleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditDriver extends EditRecord
+class EditVehicle extends EditRecord
 {
-    protected static string $resource = DriverResource::class;
+    protected static string $resource = VehicleResource::class;
 
     protected function getHeaderActions(): array
     {

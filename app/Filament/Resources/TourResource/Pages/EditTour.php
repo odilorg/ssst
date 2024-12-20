@@ -13,14 +13,7 @@ class EditTour extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
             Actions\DeleteAction::make(),
         ];
-
-        
     }
-    protected function getRedirectUrl(): string
-{
-    return $this->getResource()::getUrl('index');
-}
 }

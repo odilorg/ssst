@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Driver;
+use App\Models\Owner;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -11,14 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
-use App\Filament\Resources\DriverResource\Pages;
+use App\Filament\Resources\OwnerResource\Pages;
 
-class DriverResource extends Resource
+class OwnerResource extends Resource
 {
-    protected static ?string $model = Driver::class;
+    protected static ?string $model = Owner::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationGroup = 'Driver and Guide Details';
 
@@ -27,21 +26,27 @@ class DriverResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Driver Name')
+                    ->label('Owner Name')
                     ->required()
                     ->maxLength(255),
 
-                TextInput::make('license_number')
-                    ->label('License Number')
-                    ->required()
-                    ->maxLength(255),
+                Select::make('type')
+                    ->label('Owner Type')
+                    ->options([
+                        'driver' => 'Driver',
+                        'company' => 'Company',
+                    ])
+                    ->required(),
 
-                Select::make('vehicles')
-                    ->label('Assigned Vehicles')
-                    ->relationship('assignedVehicles', 'license_plate') // Define many-to-many relationship
-                    ->multiple()
-                    ->preload()
-                    ->searchable(),
+                TextInput::make('contact')
+                    ->label('Contact Number')
+                    ->tel()
+                    ->maxLength(20),
+
+                TextInput::make('email')
+                    ->label('Email Address')
+                    ->email()
+                    ->maxLength(255),
             ]);
     }
 
@@ -54,14 +59,19 @@ class DriverResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('license_number')
-                    ->label('License Number')
+                TextColumn::make('type')
+                    ->label('Type')
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('assignedVehicles.license_plate')
-                    ->label('Assigned Vehicles')
-                    ->wrap(),
+                TextColumn::make('contact')
+                    ->label('Contact Number')
+                    ->sortable(),
+
+                TextColumn::make('email')
+                    ->label('Email Address')
+                    ->searchable()
+                    ->sortable(),
 
                 TextColumn::make('created_at')
                     ->label('Created At')
@@ -88,16 +98,17 @@ class DriverResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // Define additional relation managers if needed
+            // Define additional relation managers if necessary
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDrivers::route('/'),
-            'create' => Pages\CreateDriver::route('/create'),
-            'edit' => Pages\EditDriver::route('/{record}/edit'),
+            'index' => Pages\ListOwners::route('/'),
+            'create' => Pages\CreateOwner::route('/create'),
+            'edit' => Pages\EditOwner::route('/{record}/edit'),
         ];
     }
 }
+

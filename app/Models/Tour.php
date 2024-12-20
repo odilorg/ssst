@@ -1,27 +1,18 @@
 <?php
 
+// Tour Model
 namespace App\Models;
 
-use App\Casts\MoneyCast;
-use App\Models\BaseModel as Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Tour extends Model
 {
     use HasFactory;
-    protected $fillable = ['tenant_id','title', 'tour_duration', 'tour_description', 'tour_price'];
 
-    protected $casts = [
-        'tour_price' => MoneyCast::class,
-    ];
+    protected $fillable = ['title', 'tour_duration', 'tour_description'];
 
-    public function tourPrices(): HasMany
-    {
-        return $this->hasMany(TourPrice::class);
-    }
-
-    public function tourDays(): HasMany
+    public function tourDays()
     {
         return $this->hasMany(TourDay::class);
     }

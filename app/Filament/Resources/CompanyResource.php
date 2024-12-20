@@ -2,21 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Driver;
+use App\Models\Company;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
-use App\Filament\Resources\DriverResource\Pages;
+use App\Filament\Resources\CompanyResource\Pages;
 
-class DriverResource extends Resource
+class CompanyResource extends Resource
 {
-    protected static ?string $model = Driver::class;
+    protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -27,21 +25,23 @@ class DriverResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Driver Name')
+                    ->label('Company Name')
                     ->required()
                     ->maxLength(255),
 
-                TextInput::make('license_number')
-                    ->label('License Number')
-                    ->required()
+                TextInput::make('address')
+                    ->label('Address')
                     ->maxLength(255),
 
-                Select::make('vehicles')
-                    ->label('Assigned Vehicles')
-                    ->relationship('assignedVehicles', 'license_plate') // Define many-to-many relationship
-                    ->multiple()
-                    ->preload()
-                    ->searchable(),
+                TextInput::make('phone')
+                    ->label('Phone')
+                    ->tel()
+                    ->maxLength(20),
+
+                TextInput::make('email')
+                    ->label('Email')
+                    ->email()
+                    ->maxLength(255),
             ]);
     }
 
@@ -54,14 +54,20 @@ class DriverResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('license_number')
-                    ->label('License Number')
+                TextColumn::make('address')
+                    ->label('Address')
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('assignedVehicles.license_plate')
-                    ->label('Assigned Vehicles')
-                    ->wrap(),
+                TextColumn::make('phone')
+                    ->label('Phone')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable()
+                    ->sortable(),
 
                 TextColumn::make('created_at')
                     ->label('Created At')
@@ -74,7 +80,7 @@ class DriverResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                // Add filters if necessary
+                // Add filters if needed
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -95,9 +101,9 @@ class DriverResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDrivers::route('/'),
-            'create' => Pages\CreateDriver::route('/create'),
-            'edit' => Pages\EditDriver::route('/{record}/edit'),
+            'index' => Pages\ListCompanies::route('/'),
+            'create' => Pages\CreateCompany::route('/create'),
+            'edit' => Pages\EditCompany::route('/{record}/edit'),
         ];
     }
 }
