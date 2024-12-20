@@ -88,11 +88,27 @@ class TourResource extends Resource
                                             ->required()
                                             ->placeholder('Select a vehicle'),
                                     ]),
+                                    Forms\Components\Section::make('Guide Monument Details')
+                                    ->description('Assign Guide and Monuments')
+                                    ->schema([
+                                        Forms\Components\Select::make('monuments')
+                                            ->relationship('monuments', 'name')
+                                            ->multiple()
+                                            ->preload(),
+                                        Forms\Components\Select::make('guide')
+                                            ->relationship('guide', 'full_name')
+                                            //->multiple()
+                                            ->preload()    
+
+                                    ])
+
+
+
                             ])
                             ->columnSpan(1),
                     ]),
 
-                
+
             ]);
     }
 

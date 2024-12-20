@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TourDay extends Model
 {
@@ -24,5 +25,16 @@ class TourDay extends Model
     public function driver()
     {
         return $this->belongsTo(Driver::class);
+    }
+
+    public function monuments(): BelongsToMany
+    {
+        return $this->belongsToMany(Monument::class)
+                    ->withTimestamps();
+    }
+
+    public function guide()
+    {
+        return $this->belongsTo(Guide::class);
     }
 }
