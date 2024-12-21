@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('arrival_location');
             $table->timestamp('departure_time');
             $table->timestamp('arrival_time')->nullable();
-            $table->integer('price');
+            $table->decimal('price', 10, 2)->nullable();
             $table->string('seat_class')->nullable();
            
             $table->timestamps();

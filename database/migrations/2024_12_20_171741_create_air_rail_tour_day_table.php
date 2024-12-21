@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('seat_number')->nullable();
             $table->enum('reservation_status', ['reserved', 'pending', 'canceled'])->default('pending');
             $table->text('special_requests')->nullable();
-            $table->integer('cost')->nullable();
-            $table->integer('discount')->nullable();
+            $table->decimal('cost', 10, 2)->nullable();
+            $table->decimal('discount', 10, 2)->nullable();
            
-            $table->integer('total_price')->nullable();
+            $table->decimal('total_price', 10, 2)->nullable();
             $table->timestamps();
         });
     }
