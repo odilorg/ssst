@@ -37,4 +37,26 @@ class TourDay extends Model
     {
         return $this->belongsTo(Guide::class);
     }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
+
+    public function airRails()
+    {
+        return $this->belongsToMany(AirRail::class, 'air_rail_tour_day')
+                    ->withPivot([
+                        'ticket_number',
+                        'departure_time_override',
+                        'arrival_time_override',
+                        'reservation_status',
+                        'special_requests',
+                        'cost',
+                        'discount',
+                        
+                        'total_price',
+                    ])
+                    ->withTimestamps();
+    }
 }

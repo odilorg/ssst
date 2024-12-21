@@ -88,7 +88,7 @@ class TourResource extends Resource
                                             ->required()
                                             ->placeholder('Select a vehicle'),
                                     ]),
-                                    Forms\Components\Section::make('Guide Monument Details')
+                                Forms\Components\Section::make('Guide Monument Details')
                                     ->description('Assign Guide and Monuments')
                                     ->schema([
                                         Forms\Components\Select::make('monuments')
@@ -98,12 +98,44 @@ class TourResource extends Resource
                                         Forms\Components\Select::make('guide')
                                             ->relationship('guide', 'full_name')
                                             //->multiple()
+                                            ->preload(),
+                                        Forms\Components\Select::make('hotel')
+                                            ->relationship('hotel', 'name')
+                                            //->multiple()
                                             ->preload()    
 
+                                    ]),
+                                    Forms\Components\Section::make('Air and Rail Details')
+                                    ->description('Assign Air and Rail Transportation')
+                                    ->schema([
+                                        Forms\Components\Select::make('air_rails')
+                                            ->label('Air or Rail')
+                                            ->relationship('airRails', 'name') // Correct relationship for the many-to-many association
+                                            ->multiple() // Allows selecting multiple AirRail records
+                                            ->preload()
+                                            ->searchable(),
+                                        Forms\Components\Repeater::make('air_rails_details') // Handling details for the pivot table
+                                            ->label('Air Rail Details')
+                                            ->relationship('airRails') // Reflects the correct relationship
+                                            ->schema([
+                                                Forms\Components\TextInput::make('departure_time_override')
+                                                    ->label('Departure Time Override')
+                                                    ->type('datetime-local')
+                                                    ->nullable(),
+                                                Forms\Components\TextInput::make('arrival_time_override')
+                                                    ->label('Arrival Time Override')
+                                                    ->type('datetime-local')
+                                                    ->nullable(),
+                                                Forms\Components\TextInput::make('ticket_number')
+                                                    ->label('Ticket Number')
+                                                    ->nullable(),
+                                                Forms\Components\Textarea::make('special_requests')
+                                                    ->label('Special Requests')
+                                                    ->nullable(),
+                                            ])
+                                            ->columns(2),
                                     ])
-
-
-
+                                
                             ])
                             ->columnSpan(1),
                     ]),
