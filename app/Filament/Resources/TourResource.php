@@ -72,7 +72,7 @@ class TourResource extends Resource
                                         Forms\Components\Select::make('driver_id')
                                             ->label('Driver')
                                             ->relationship('driver', 'name') // Populate drivers dynamically
-                                            ->required()
+                                           // ->required()
                                             ->reactive(),
 
                                         Forms\Components\Select::make('vehicle_id')
@@ -85,7 +85,7 @@ class TourResource extends Resource
                                                     })->pluck('license_plate', 'id')
                                                     : [];
                                             })
-                                            ->required()
+                                            //->required()
                                             ->placeholder('Select a vehicle'),
                                     ]),
                                 Forms\Components\Section::make('Guide Monument Details')
@@ -102,40 +102,53 @@ class TourResource extends Resource
                                         Forms\Components\Select::make('hotel')
                                             ->relationship('hotel', 'name')
                                             //->multiple()
-                                            ->preload()    
+                                            ->preload()
 
                                     ]),
-                                    Forms\Components\Section::make('Air and Rail Details')
-                                    ->description('Assign Air and Rail Transportation')
+
+                                Forms\Components\Repeater::make('airRailDetails') // Correct HasMany relationship
+                                    ->label('Air Rail Details')
+                                    ->relationship() // Automatically maps to the airRailDetails relationship
                                     ->schema([
-                                        Forms\Components\Select::make('air_rails')
+                                        Forms\Components\Select::make('air_rail_id')
                                             ->label('Air or Rail')
-                                            ->relationship('airRails', 'name') // Correct relationship for the many-to-many association
-                                            ->multiple() // Allows selecting multiple AirRail records
+                                            ->relationship('airRail', 'name') // Reference the AirRail model
+                                            ->required()
                                             ->preload()
                                             ->searchable(),
-                                        Forms\Components\Repeater::make('air_rails_details') // Handling details for the pivot table
-                                            ->label('Air Rail Details')
-                                            ->relationship('airRails') // Reflects the correct relationship
-                                            ->schema([
-                                                Forms\Components\TextInput::make('departure_time_override')
-                                                    ->label('Departure Time Override')
-                                                    ->type('datetime-local')
-                                                    ->nullable(),
-                                                Forms\Components\TextInput::make('arrival_time_override')
-                                                    ->label('Arrival Time Override')
-                                                    ->type('datetime-local')
-                                                    ->nullable(),
-                                                Forms\Components\TextInput::make('ticket_number')
-                                                    ->label('Ticket Number')
-                                                    ->nullable(),
-                                                Forms\Components\Textarea::make('special_requests')
-                                                    ->label('Special Requests')
-                                                    ->nullable(),
-                                            ])
-                                            ->columns(2),
+                                        Forms\Components\TextInput::make('seat_number')
+                                            ->label('Seat Number')
+                                            ->nullable(),
+                                            Forms\Components\TextInput::make('ticket_number')
+                                            ->label('Ticket Number')
+                                            ->required(),
+                                        Forms\Components\Textarea::make('special_requests')
+                                            ->label('Special Requests')
+                                            ->nullable(),
+                                        Forms\Components\TextInput::make('cost')
+                                            ->label('Cost')
+                                            ->numeric()
+                                            ->nullable(),
+                                        Forms\Components\TextInput::make('discount')
+                                            ->label('Discount')
+                                            ->numeric()
+                                            ->nullable(),
+                                        Forms\Components\TextInput::make('total_price')
+                                            ->label('Total Price')
+                                            ->numeric()
+                                            ->nullable(),
                                     ])
-                                
+                                    ->columns(2),
+
+
+
+
+
+
+
+
+
+
                             ])
                             ->columnSpan(1),
                     ]),

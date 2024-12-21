@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\AirRailTourDay;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -58,5 +60,11 @@ class TourDay extends Model
                         'total_price',
                     ])
                     ->withTimestamps();
+    }
+
+
+    public function airRailDetails(): HasMany
+    {
+        return $this->hasMany(AirRailTourDay::class);
     }
 }
