@@ -35,10 +35,11 @@ class TourDay extends Model
                     ->withTimestamps();
     }
 
-    public function guide()
+    public function guideLang()
     {
-        return $this->belongsTo(Guide::class);
+        return $this->belongsTo(SpokenLanguage::class, 'guide_price_id');
     }
+
 
     public function hotel()
     {

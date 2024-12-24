@@ -101,8 +101,8 @@ class TourResource extends Resource
                                             ->relationship('monuments', 'name')
                                             ->multiple()
                                             ->preload(),
-                                        Forms\Components\Select::make('guide')
-                                            ->relationship('guide', 'full_name')
+                                        Forms\Components\Select::make('guide_price_id')
+                                            ->relationship('guideLang', 'language')
                                             //->multiple()
                                             ->preload(),
                                         Forms\Components\Select::make('hotel')
