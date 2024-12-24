@@ -88,14 +88,26 @@ class VehicleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('license_plate')
-                    ->label('License Plate')
+                TextColumn::make('subCategory.price.price')
+                    ->label('Price')
                     ->searchable()
                     ->sortable(),
+                    TextColumn::make('subCategory.category.name')
+                    ->label('Category Type')
+                    ->searchable()
+                    ->sortable(),  
+                    TextColumn::make('subCategory.name')
+                    ->label('Sub Category Type')
+                    ->searchable()
+                    ->sortable(), 
+                     
 
-                TextColumn::make('type')
-                    ->label('Type')
-                    ->sortable(),
+                    TextColumn::make('license_plate')
+                    ->label('License Plate')
+                    ->searchable()
+                    ->sortable(),    
+
+               
 
                 TextColumn::make('make')
                     ->label('Make')

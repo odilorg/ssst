@@ -28,6 +28,6 @@ class Vehicle extends Model
 
     public function subCategory()
     {
-        return $this->belongsTo(VehicleSubCategory::class);
+        return $this->belongsTo(VehicleSubCategory::class, 'vehicle_sub_category_id');
     }
 }

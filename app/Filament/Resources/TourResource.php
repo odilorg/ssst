@@ -18,6 +18,7 @@ use App\Filament\Resources\TourResource\Pages;
 use Filament\Infolists\Components\RepeatableEntry;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TourResource\RelationManagers;
+use Filament\Forms\Components\Select;
 
 class TourResource extends Resource
 {
@@ -69,24 +70,29 @@ class TourResource extends Resource
                                 Forms\Components\Section::make('Transportation Details')
                                     ->description('Assign Driver and Vehicle')
                                     ->schema([
-                                        Forms\Components\Select::make('driver_id')
-                                            ->label('Driver')
-                                            ->relationship('driver', 'name') // Populate drivers dynamically
-                                           // ->required()
-                                            ->reactive(),
-
-                                        Forms\Components\Select::make('vehicle_id')
+                                        // Forms\Components\Select::make('driver_id')
+                                        //     ->label('Driver')
+                                        //     ->relationship('driver', 'name') // Populate drivers dynamically
+                                        //    // ->required()
+                                        //     ->reactive(),
+                                        Select::make('vehicle_id')
                                             ->label('Vehicle')
-                                            ->options(function (callable $get) {
-                                                $driverId = $get('driver_id');
-                                                return $driverId
-                                                    ? \App\Models\Vehicle::whereHas('drivers', function ($query) use ($driverId) {
-                                                        $query->where('drivers.id', $driverId);
-                                                    })->pluck('license_plate', 'id')
-                                                    : [];
-                                            })
-                                            //->required()
-                                            ->placeholder('Select a vehicle'),
+                                            ->relationship('vehicle.subCategory', 'name')
+                                            ->required()
+                                            ->preload()
+                                            ->searchable(),
+                                        // Forms\Components\Select::make('vehicle_id')
+                                        //     ->label('Vehicle')
+                                        //     ->options(function (callable $get) {
+                                        //         $driverId = $get('driver_id');
+                                        //         return $driverId
+                                        //             ? \App\Models\Vehicle::whereHas('drivers', function ($query) use ($driverId) {
+                                        //                 $query->where('drivers.id', $driverId);
+                                        //             })->pluck('license_plate', 'id')
+                                        //             : [];
+                                        //     })
+                                        //     //->required()
+                                        //     ->placeholder('Select a vehicle'),
                                     ]),
                                 Forms\Components\Section::make('Guide Monument Details')
                                     ->description('Assign Guide and Monuments')
