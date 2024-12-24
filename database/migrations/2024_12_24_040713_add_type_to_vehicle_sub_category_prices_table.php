@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vehicles', function (Blueprint $table) {
-            $table->foreignId('vehicle_sub_category_id')->constrained()->onDelete('cascade');
+        Schema::table('vehicle_sub_category_prices', function (Blueprint $table) {
+            $table->string('type')->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vehicles', function (Blueprint $table) {
+        Schema::table('vehicle_sub_category_prices', function (Blueprint $table) {
             //
         });
     }

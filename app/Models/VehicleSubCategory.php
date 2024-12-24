@@ -19,4 +19,9 @@ class VehicleSubCategory extends Model
     {
         return $this->hasMany(Vehicle::class);
     }
+
+    public function price()
+    {
+        return $this->hasOne(VehicleSubCategoryPrice::class);
+    } 
 }

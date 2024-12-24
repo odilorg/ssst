@@ -27,6 +27,13 @@ class VehicleResource extends Resource
     {
         return $form
             ->schema([
+                
+                Select::make('vehicle_sub_category_id')
+                    ->label('Choose Vehicle Category')
+                    ->options(\App\Models\VehicleSubCategory::pluck('name', 'id'))
+                    ->required()
+                    ->searchable(),
+                
                 TextInput::make('license_plate')
                     ->label('License Plate')
                     ->required()
@@ -52,13 +59,7 @@ class VehicleResource extends Resource
                     ->required()
                     ->searchable(),
 
-                Select::make('type')
-                    ->label('Vehicle Type')
-                    ->options([
-                        'car' => 'Car',
-                        'bus' => 'Bus',
-                    ])
-                    ->required(),
+               
 
                 TextInput::make('make')
                     ->label('Make')
