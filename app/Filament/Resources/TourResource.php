@@ -19,6 +19,7 @@ use Filament\Infolists\Components\RepeatableEntry;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TourResource\RelationManagers;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 
 class TourResource extends Resource
 {
@@ -67,20 +68,46 @@ class TourResource extends Resource
                                 Forms\Components\FileUpload::make('image')
                                     ->image(),
 
-                                Forms\Components\Section::make('Transportation Details')
-                                    ->description('Assign Driver and Vehicle')
-                                    ->schema([
-                                        // Forms\Components\Select::make('driver_id')
-                                        //     ->label('Driver')
-                                        //     ->relationship('driver', 'name') // Populate drivers dynamically
-                                        //    // ->required()
-                                        //     ->reactive(),
-                                        Select::make('vehicle_id')
+                                // Forms\Components\Section::make('Transportation Details')
+                                //     ->description('Assign Driver and Vehicle')
+                                //     ->schema([
+                                //         // Forms\Components\Select::make('driver_id')
+                                //         //     ->label('Driver')
+                                //         //     ->relationship('driver', 'name') // Populate drivers dynamically
+                                //         //    // ->required()
+                                //         //     ->reactive(),
+
+                                        Forms\Components\Repeater::make('vehiclePriceDetails')
+                                            ->label('Pick Vehicles for this day')
+                                            ->relationship() // Define relationship to TourDays model
+                                        ->schema([
+                                            Select::make('vehicle_sub_category_id')
                                             ->label('Vehicle')
-                                            ->relationship('vehicle.subCategory', 'name')
+                                            ->relationship('vehicleSubCategoryPrice.subCategory', 'name')
                                             ->required()
                                             ->preload()
                                             ->searchable(),
+                                            // TextInput::make('price')
+                                            //     ->label('Price')
+                                            //     ->numeric()
+                                            //     ->required(),
+                                           
+                                        ]),
+
+                                    //     Forms\Components\Repeater::make('airRailDetails') // Correct HasMany relationship
+                                    // ->label('Air Rail Details')
+                                    // ->relationship() // Automatically maps to the airRailDetails relationship
+                                    // ->schema([
+                                    //     Forms\Components\Select::make('air_rail_id')
+                                    //         ->label('Air or Rail')
+                                    //         ->relationship('airRail', 'name') // Reference the AirRail model
+                                    //         ->required()
+                                    //         ->preload()
+                                    //         ->searchable(),
+
+                                       
+
+
                                         // Forms\Components\Select::make('vehicle_id')
                                         //     ->label('Vehicle')
                                         //     ->options(function (callable $get) {
@@ -93,7 +120,7 @@ class TourResource extends Resource
                                         //     })
                                         //     //->required()
                                         //     ->placeholder('Select a vehicle'),
-                                    ]),
+                                   // ]),
                                 Forms\Components\Section::make('Guide Monument Details')
                                     ->description('Assign Guide and Monuments')
                                     ->schema([

@@ -19,15 +19,22 @@ class TourDay extends Model
         return $this->belongsTo(Tour::class);
     }
 
-    public function vehicle()
-    {
-        return $this->belongsTo(Vehicle::class);
-    }
+    // public function vehiclePrice()
+    // {
+    //     return $this->belongsTo(VehicleSubCategoryPrice::class, 'vehicle_price_id');
+    // }
 
-    public function driver()
-    {
-        return $this->belongsTo(Driver::class);
-    }
+    // public function vehiclePrices()
+    // {
+    //     return $this->hasMany(VehicleSubCategoryPrice::class, '');
+    // }
+
+    
+
+    // public function driver()
+    // {
+    //     return $this->belongsTo(Driver::class);
+    // }
 
     public function monuments(): BelongsToMany
     {
@@ -68,4 +75,21 @@ class TourDay extends Model
     {
         return $this->hasMany(AirRailTourDay::class);
     }
+    
+
+    public function vehiclePrices(): BelongsToMany
+    {
+        return $this->belongsToMany(VehicleSubCategoryPrice::class, 'tour_day_vehicle_sub_category_price')
+                    ->withPivot([
+                        'price',
+                        'type',
+                    ])
+                    ->withTimestamps();
+    }
+
+    public function vehiclePriceDetails(): HasMany
+    {
+        return $this->hasMany(TourDayVehicleSubCategoryPrice::class);
+    }
+
 }
