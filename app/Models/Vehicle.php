@@ -25,4 +25,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(TourDay::class);
     }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(VehicleSubCategory::class);
+    }
 }
